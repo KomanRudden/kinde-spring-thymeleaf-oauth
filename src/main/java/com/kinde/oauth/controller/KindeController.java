@@ -1,6 +1,5 @@
 package com.kinde.oauth.controller;
 
-import org.springframework.security.core.AuthenticatedPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,12 +27,20 @@ public class KindeController {
         if (authentication.getPrincipal() instanceof OidcUser) {
             OidcUser oidcUser = ((OidcUser) authentication.getPrincipal());
         }
-        return "users";
+        return "user";
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/home")
+    public String home(Model model) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof DefaultOidcUser user) {
+            model.addAttribute("username", user.getUserInfo().getFullName());
+        }
+        return "home";
+    }
+
+    @GetMapping(path = "/public")
     public String index(Model model) {
-        // Need to look up principal here. By including it as a method param, Spring will redirect to login (which isn't required for this endpoint)
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof DefaultOidcUser user) {
             model.addAttribute("username", user.getUserInfo().getFullName());
@@ -41,14 +48,14 @@ public class KindeController {
         return "public";
     }
 
-    @GetMapping(path = "/test")
-    public String test(OAuth2AuthenticationToken authentication) {
+    @GetMapping(path = "/landing")
+    public String landing(Model model, OAuth2AuthenticationToken authentication) {
         OAuth2AuthorizedClient authorizedClient = authorizedClientService.loadAuthorizedClient(
                 authentication.getAuthorizedClientRegistrationId(),
                 authentication.getName());
 
         String accessToken = authorizedClient.getAccessToken().getTokenValue();
-
-        return "Access Token: " + accessToken;
+        model.addAttribute("access_token", accessToken);
+        return "landing";
     }
 }

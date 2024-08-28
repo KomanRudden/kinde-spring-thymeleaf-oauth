@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+    <head th:include="layout :: headerFragment">
+        <title>Kinde</title></head>
+    <body>
+        <div id="container">
+            <div class="jumbotron text-center">
+                <h3>Kinde API Test Page</h3>
+            </div>
+            <div>
+                <div class="well">
+                    <p>Access Token: <span th:text="${access_token}"></span></p>
+                    <br>
+                    <div>
+                        <a href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
