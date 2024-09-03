@@ -40,6 +40,9 @@ public class KindeController {
             model.addAttribute("token", user.getIdToken().getTokenValue());
         }
 
+        String accessToken = authorizedClient.getAccessToken().getTokenValue();
+        model.addAttribute("access_token", accessToken);
+
         // @formatter:off
         String userprofile = this.webClient
                 .get()

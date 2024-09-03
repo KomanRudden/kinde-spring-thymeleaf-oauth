@@ -114,8 +114,13 @@ a {
   font-weight: var(--g-font-weight-black);
 }
 
-.text-display-3 {
+.text-display-4 {
   font-size: var(--g-font-size-large);
+  font-weight: var(--g-font-weight-black);
+}
+
+.text-display-5 {
+  font-size: var(--g-font-size-base);
   font-weight: var(--g-font-weight-black);
 }
 
