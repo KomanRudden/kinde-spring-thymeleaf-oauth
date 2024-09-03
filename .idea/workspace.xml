@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="Styling for dashboard edited">
+    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="Link to jwt.io added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" afterDir="false" />
     </list>
@@ -41,7 +42,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.KindeSpringOauthApplication.executor": "Run",
+    "Application.KindeSpringOauthApplication.executor": "Debug",
     "Maven.kinde-spring-thymeleaf-oauth [clean...].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -100,36 +101,40 @@
       <option name="project" value="LOCAL" />
       <updated>1725347073514</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Link to jwt.io added">
+      <option name="closed" value="true" />
+      <created>1725348011601</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1725348011601</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Styling for dashboard edited" />
-    <option name="LAST_COMMIT_MESSAGE" value="Styling for dashboard edited" />
+    <MESSAGE value="Link to jwt.io added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Link to jwt.io added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java</url>
-          <line>58</line>
+          <line>69</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java</url>
-          <line>75</line>
+          <line>86</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java</url>
-          <line>97</line>
+          <line>108</line>
           <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/config/CustomLogoutHandler.java</url>
@@ -140,6 +145,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/config/CustomLogoutHandler.java</url>
           <line>69</line>
           <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="53" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

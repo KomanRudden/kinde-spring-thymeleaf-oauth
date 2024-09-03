@@ -33,12 +33,23 @@ public class KindeController {
     }
 
     @GetMapping(path = "/dashboard")
-    public String dashboard(Model model) {
+    public String dashboard(Model model, @RegisteredOAuth2AuthorizedClient("kinde") OAuth2AuthorizedClient authorizedClient) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof DefaultOidcUser user) {
             model.addAttribute("fullName", user.getUserInfo().getFullName());
             model.addAttribute("token", user.getIdToken().getTokenValue());
         }
+
+        // @formatter:off
+        String userprofile = this.webClient
+                .get()
+                .attributes(oauth2AuthorizedClient(authorizedClient))
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
+        // @formatter:on
+        model.addAttribute("userprofile", userprofile);
+
         return "dashboard";
     }
 

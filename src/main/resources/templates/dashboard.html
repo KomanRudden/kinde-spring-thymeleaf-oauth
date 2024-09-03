@@ -8,7 +8,7 @@
 <div class="wrapper">
     <header>
         <nav class="nav container">
-            <h1 class="text-display-3">KindeAuth</h1>
+            <h1 class="text-display-3">KindeAuth with Spring Boot</h1>
             <div class="profile-blob">
                 <div>
                     <p class="text-heading-2" th:text="${fullName}"></p>
@@ -28,15 +28,53 @@
                     Build the important stuff.
                 </p>
             </div>
-            <section class="next-steps-section card">
-                <h2 class="text-body-2">Access Token:</h2>
-                <br/>
-                <p class="text-heading-2 token-text" th:text="${token}"></p>
-                <br/>
-                <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${token}" target="_blank">
-                    Parse token on JWT.io
-                </a>
-            </section>
+            <div class="horizontal-sections">
+                <section class="next-steps-section card">
+                    <h2 class="text-display-3">Access Token:</h2>
+                    <br/>
+                    <p class="text-heading-2 token-text">
+                        <span th:text="${token.substring(0, 20)} + '...'"></span>
+                        <a href="#" class="view-link" onclick="openTokenPopup()">[View]</a>
+                    </p>
+                    <br/>
+                    <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${token}" target="_blank">
+                        Parse token on JWT.io
+                    </a>
+                </section>
+
+                <section class="next-steps-section card">
+                    <h2 class="text-display-3">User Profile:</h2>
+                    <br/>
+                    <p class="text-heading-2 token-text">
+                        <span th:text="${userprofile.substring(0, 20)} + '...'"></span>
+                        <a href="#" class="view-link" data-popup="userprofile" onclick="openPopup(this)">[View]</a>
+                    </p>
+                    <br/>
+                </section>
+            </div>
+
+            <!-- Popup container -->
+            <div id="tokenPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closeTokenPopup()">&times;</span>
+                    <p th:text="${token}"></p>
+                </div>
+            </div>
+
+            <!-- Hidden divs to store full content -->
+            <div id="fullToken" th:text="${token}" style="visibility: hidden;"></div>
+
+            <!-- Script tag to store JSON -->
+            <script id="userProfileJson" type="application/json" th:text="${userprofile}"></script>
+
+            <!-- Popup container -->
+            <div id="popupContainer" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <pre id="popupText"></pre>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -52,5 +90,68 @@
         </div>
     </footer>
 </div>
+
+<script>
+    function openTokenPopup() {
+        document.getElementById("tokenPopup").style.display = "block";
+    }
+
+    function closeTokenPopup() {
+        document.getElementById("tokenPopup").style.display = "none";
+    }
+
+    // Optional: Close the popup if the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        var popup = document.getElementById("tokenPopup");
+        if (event.target == popup) {
+            popup.style.display = "none";
+        }
+    }
+
+
+        function openPopup(element) {
+        var popupType = element.getAttribute('data-popup');
+        var popup = document.getElementById("popupContainer");
+        var popupText = document.getElementById("popupText");
+
+        var content;
+        if (popupType === 'token') {
+            content = document.getElementById("fullToken").innerText;
+            content = fullToken ? fullToken.textContent : "Error: Token not found.";
+        } else if (popupType === 'userprofile') {
+            // Fetch JSON data from the script tag and format it
+            var userProfileJson = document.getElementById("userProfileJson").textContent;
+
+            // Decode HTML entities
+            var parser = new DOMParser();
+            var doc = parser.parseFromString(userProfileJson, 'text/html');
+            var decodedJson = doc.documentElement.textContent;
+            try {
+                var userProfile = JSON.parse(decodedJson);
+                content = JSON.stringify(userProfile, null, 2); // Format JSON with indentation
+            } catch (e) {
+                console.error("Error parsing user profile data:", e);
+                content = "Error parsing user profile data.";
+            }
+        }
+
+        popupText.textContent = content; // Display the content in the popup
+        popup.style.display = "block";
+    }
+
+    function closePopup() {
+        var popup = document.getElementById("popupContainer");
+        popup.style.display = "none";
+    }
+
+    // Optional: Close the popup if the user clicks anywhere outside of it
+    window.onclick = function(event) {
+        var popup = document.getElementById("tokenPopup");
+        if (event.target == popup) {
+            popup.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
