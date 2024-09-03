@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="User profile added. Popup view for tokena dn usr profile added">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" afterDir="false" />
+    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="Popups closing error fixed">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1725357261891</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Popups closing error fixed">
+      <option name="closed" value="true" />
+      <created>1725357633517</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725357633517</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -122,7 +130,8 @@
     <MESSAGE value="Styling for dashboard edited" />
     <MESSAGE value="Link to jwt.io added" />
     <MESSAGE value="User profile added. Popup view for tokena dn usr profile added" />
-    <option name="LAST_COMMIT_MESSAGE" value="User profile added. Popup view for tokena dn usr profile added" />
+    <MESSAGE value="Popups closing error fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Popups closing error fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
