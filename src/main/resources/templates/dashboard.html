@@ -61,14 +61,11 @@
                 </div>
             </div>
 
-            <!-- Hidden divs to store full content -->
-            <div id="fullToken" th:text="${token}" style="visibility: hidden;"></div>
-
             <!-- Script tag to store JSON -->
             <script id="userProfileJson" type="application/json" th:text="${userprofile}"></script>
 
             <!-- Popup container -->
-            <div id="popupContainer" class="popup">
+            <div id="userProfilePopup" class="popup">
                 <div class="popup-content">
                     <span class="close" onclick="closePopup()">&times;</span>
                     <pre id="popupText"></pre>
@@ -100,18 +97,9 @@
         document.getElementById("tokenPopup").style.display = "none";
     }
 
-    // Optional: Close the popup if the user clicks anywhere outside of it
-    window.onclick = function(event) {
-        var popup = document.getElementById("tokenPopup");
-        if (event.target == popup) {
-            popup.style.display = "none";
-        }
-    }
-
-
-        function openPopup(element) {
+    function openPopup(element) {
         var popupType = element.getAttribute('data-popup');
-        var popup = document.getElementById("popupContainer");
+        var popup = document.getElementById("userProfilePopup");
         var popupText = document.getElementById("popupText");
 
         var content;
@@ -136,19 +124,23 @@
         }
 
         popupText.textContent = content; // Display the content in the popup
-        popup.style.display = "block";
+        userProfilePopup.style.display = "block";
     }
 
     function closePopup() {
-        var popup = document.getElementById("popupContainer");
+        var popup = document.getElementById("userProfilePopup");
         popup.style.display = "none";
     }
 
     // Optional: Close the popup if the user clicks anywhere outside of it
     window.onclick = function(event) {
-        var popup = document.getElementById("tokenPopup");
-        if (event.target == popup) {
-            popup.style.display = "none";
+        var tokenPopup = document.getElementById("tokenPopup");
+        var userProfilePopup = document.getElementById("userProfilePopup");
+        if (event.target == tokenPopup) {
+            tokenPopup.style.display = "none";
+        }
+        if (event.target == userProfilePopup) {
+            userProfilePopup.style.display = "none";
         }
     }
 </script>

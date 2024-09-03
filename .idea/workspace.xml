@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="Link to jwt.io added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kinde/oauth/controller/KindeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/index.css" afterDir="false" />
+    <list default="true" id="b60ea6aa-1fef-45bc-a3de-52f2ef9ed742" name="Changes" comment="User profile added. Popup view for tokena dn usr profile added">
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +39,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.KindeSpringOauthApplication.executor": "Debug",
+    "Application.KindeSpringOauthApplication.executor": "Run",
     "Maven.kinde-spring-thymeleaf-oauth [clean...].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -109,14 +106,23 @@
       <option name="project" value="LOCAL" />
       <updated>1725348011601</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="User profile added. Popup view for tokena dn usr profile added">
+      <option name="closed" value="true" />
+      <created>1725357261891</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1725357261891</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Styling for dashboard edited" />
     <MESSAGE value="Link to jwt.io added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Link to jwt.io added" />
+    <MESSAGE value="User profile added. Popup view for tokena dn usr profile added" />
+    <option name="LAST_COMMIT_MESSAGE" value="User profile added. Popup view for tokena dn usr profile added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
