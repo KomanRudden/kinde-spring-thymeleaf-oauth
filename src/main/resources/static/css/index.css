@@ -249,6 +249,12 @@ a {
 }
 
 .next-steps-section {
-  word-wrap: break-word; /* Ensure long words (or tokens) break properly */
-  margin-top: var(--g-spacing-2x-large);
+  background: var(--g-color-black);
+  border-radius: var(--g-border-radius-large);
+  box-shadow: var(--g-box-shadow);
+  color: var(--g-color-white);
+  padding: var(--g-spacing-2x-large); /* Adds padding inside the section */
+  margin-top: var(--g-spacing-2x-large); /* Space above the section */
+  word-wrap: break-word; /* Ensures long text wraps properly */
 }
+

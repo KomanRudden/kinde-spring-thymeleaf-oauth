@@ -28,9 +28,14 @@
                     Build the important stuff.
                 </p>
             </div>
-            <section class="next-steps-section">
-                <h2 class="text-heading-1">Access Token:</h2>
+            <section class="next-steps-section card">
+                <h2 class="text-body-2">Access Token:</h2>
+                <br/>
                 <p class="text-heading-2 token-text" th:text="${token}"></p>
+                <br/>
+                <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${token}" target="_blank">
+                    Parse token on JWT.io
+                </a>
             </section>
         </div>
     </main>
