@@ -47,7 +47,20 @@
 
 html,
 body {
+  height: 100%; /* Ensure the body and html elements fill the viewport height */
+  margin: 0;
+  padding: 0;
   font-family: var(--g-font-family);
+}
+
+.wrapper {
+    min-height: 100%; /* Make sure the wrapper takes up at least 100% of the viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* This makes the content area grow and take up available space */
 }
 
 button {
@@ -109,6 +122,11 @@ a {
 .text-heading-2 {
   font-size: var(--g-font-size-base);
   font-weight: var(--g-font-weight-semi-bold);
+}
+
+.token-text {
+    word-break: break-all; /* Forces wrapping of very long tokens */
+    overflow-wrap: break-word; /* Handles overflow and wraps the text */
 }
 
 .container {
@@ -193,6 +211,9 @@ a {
 .footer {
   padding-bottom: var(--g-spacing-x-large);
   padding-top: var(--g-spacing-x-large);
+  background-color: #f8f9fa; /* Example styling */
+  padding: 1rem;
+  text-align: center;
 }
 
 .footer-tagline {
@@ -228,5 +249,6 @@ a {
 }
 
 .next-steps-section {
+  word-wrap: break-word; /* Ensure long words (or tokens) break properly */
   margin-top: var(--g-spacing-2x-large);
 }

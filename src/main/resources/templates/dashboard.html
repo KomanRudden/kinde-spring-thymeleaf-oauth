@@ -5,44 +5,47 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
 </head>
 <body>
-<header>
-    <nav class="nav container">
-        <h1 class="text-display-3">KindeAuth</h1>
-        <div class="profile-blob">
-            <div>
-                <p class="text-heading-2" th:text="${fullName}"></p>
-                <a class="text-subtle" href="/logout">Sign out</a>
+<div class="wrapper">
+    <header>
+        <nav class="nav container">
+            <h1 class="text-display-3">KindeAuth</h1>
+            <div class="profile-blob">
+                <div>
+                    <p class="text-heading-2" th:text="${fullName}"></p>
+                    <a class="text-subtle" href="/logout">Sign out</a>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<main>
-    <div class="container">
-        <div class="card start-hero">
-            <p class="text-body-2 start-hero-intro">Woohoo!</p>
-            <p class="text-display-2">
-                Your authentication is all sorted.
-                <br/>
-                Build the important stuff.
+    <main class="content">
+        <div class="container">
+            <div class="card start-hero">
+                <p class="text-body-2 start-hero-intro">Woohoo!</p>
+                <p class="text-display-2">
+                    Your authentication is all sorted.
+                    <br/>
+                    Build the important stuff.
+                </p>
+            </div>
+            <section class="next-steps-section">
+                <h2 class="text-heading-1">Access Token:</h2>
+                <p class="text-heading-2 token-text" th:text="${token}"></p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <strong class="text-heading-2">KindeAuth</strong>
+            <p class="footer-tagline text-body-3">
+                Browse Kinde
+                <a class="link" href="https://kinde.com/docs">docs</a>
             </p>
+
+            <small class="text-subtle">© 2024 KindeAuth, Inc. All rights reserved</small>
         </div>
-        <section class="next-steps-section">
-            <h2 class="text-heading-1">Access Token: <p class="text-heading-2" th:text="${token}"></p></h2>
-        </section>
-    </div>
-</main>
-
-<footer class="footer">
-    <div class="container">
-        <strong class="text-heading-2">KindeAuth</strong>
-        <p class="footer-tagline text-body-3">
-            Browse Kinde
-            <a class="link" href="https://kinde.com/docs">docs</a>
-        </p>
-
-        <small class="text-subtle">© 2024 KindeAuth, Inc. All rights reserved</small>
-    </div>
-</footer>
+    </footer>
+</div>
 </body>
 </html>

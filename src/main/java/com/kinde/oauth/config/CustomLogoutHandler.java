@@ -56,7 +56,7 @@ public class CustomLogoutHandler implements LogoutHandler {
 
     // TODO clearing session upon logout not working
     private void revokeAccessToken(String accessToken) {
-        String revokeUrl = "https://koman.kinde.com/logout";
+        String revokeUrl = "https://koman.kinde.com/revoke";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/x-www-form-urlencoded");
