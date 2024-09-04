@@ -25,6 +25,11 @@ import java.util.stream.Collectors;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ * Security configuration class that sets up the security filters and OAuth2 login
+ * configurations for the application. This class enables method-level security
+ * and configures the security filter chain with necessary handlers.
+ */
 @Slf4j
 @Configuration
 @EnableWebSecurity
@@ -33,10 +38,27 @@ public class SecurityConfig {
 
     private final OidcLogoutHandler oidcLogoutHandler;
 
+    /**
+     * Constructs a SecurityConfig with the provided OidcLogoutHandler.
+     *
+     * @param oidcLogoutHandler the logout handler for OIDC authentication.
+     */
     public SecurityConfig(OidcLogoutHandler oidcLogoutHandler) {
         this.oidcLogoutHandler = oidcLogoutHandler;
     }
 
+    /**
+     * Configures the security filter chain, setting up CORS, authorization rules,
+     * OAuth2 resource server, and OAuth2 login with OIDC user service.
+     * <p>
+     * Note: If you wish to use configuration-based security instead of method-based security,
+     * you can uncomment the relevant lines and specify roles or permissions directly here.
+     * </p>
+     *
+     * @param http the HttpSecurity to modify.
+     * @return the configured SecurityFilterChain.
+     * @throws Exception if an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -44,8 +66,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/", "/home").permitAll()
-//                        .requestMatchers("/admin").hasRole("admins")
-//                        .requestMatchers("/read").hasRole("read")
+                        // Uncomment the lines below to configure security based on roles or permissions
+                        // .requestMatchers("/admin").hasRole("admins")
+                        // .requestMatchers("/read").hasRole("read")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -69,6 +92,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configures the JwtAuthenticationConverter to extract authorities from JWT claims.
+     *
+     * @return the configured JwtAuthenticationConverter.
+     */
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
@@ -76,16 +104,17 @@ public class SecurityConfig {
         return converter;
     }
 
+    /**
+     * Extracts authorities from the JWT claims, converting them to GrantedAuthority.
+     *
+     * @param jwt the JWT containing the claims.
+     * @return a collection of GrantedAuthority extracted from the JWT claims.
+     */
     private Collection<GrantedAuthority> extractAuthoritiesFromClaims(Jwt jwt) {
         var permissions = jwt.getClaimAsStringList("permissions");
 
         return permissions.stream()
                 .map(permission -> new SimpleGrantedAuthority("ROLE_" + permission))
                 .collect(Collectors.toList());
-    }
-
-    @Bean
-    public JwtDecoder jwtDecoder() {
-        return JwtDecoders.fromOidcIssuerLocation("https://koman.kinde.com");
     }
 }
