@@ -208,6 +208,13 @@ a {
   color: var(--g-color-white);
 }
 
+.card {
+  background: var(--g-color-black);
+  border-radius: var(--g-border-radius-large);
+  box-shadow: var(--g-box-shadow);
+  color: var(--g-color-white);
+}
+
 .link {
   text-decoration: underline;
   text-underline-offset: 0.2rem;

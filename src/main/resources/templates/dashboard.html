@@ -29,12 +29,25 @@
                 </p>
             </div>
             <div class="horizontal-sections">
-                <section class="next-steps-section card">
+                <section class="next-steps-section card-grey">
+                    <h2 class="text-display-4">ID Token:</h2>
+                    <br/>
+                    <p class="text-heading-2 token-text">
+                        <span th:text="${id_token.substring(0, 20)} + '...'"></span>
+                        <a href="#" class="text-display-5" onclick="openTokenPopup('idTokenPopup')">[View]</a>
+                    </p>
+                    <br/>
+                    <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${id_token}" target="_blank">
+                        Parse token on JWT.io
+                    </a>
+                </section>
+
+                <section class="next-steps-section card-grey">
                     <h2 class="text-display-4">Access Token:</h2>
                     <br/>
                     <p class="text-heading-2 token-text">
                         <span th:text="${access_token.substring(0, 20)} + '...'"></span>
-                        <a href="#" class="text-display-5" onclick="openTokenPopup()">[View]</a>
+                        <a href="#" class="text-display-5" onclick="openTokenPopup('accessTokenPopup')">[View]</a>
                     </p>
                     <br/>
                     <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${access_token}" target="_blank">
@@ -42,7 +55,7 @@
                     </a>
                 </section>
 
-                <section class="next-steps-section card">
+                <section class="next-steps-section card-grey">
                     <h2 class="text-display-4">User Profile:</h2>
                     <br/>
                     <p class="text-heading-2 token-text">
@@ -54,10 +67,18 @@
             </div>
 
             <!-- Popup container -->
-            <div id="tokenPopup" class="popup">
+            <div id="accessTokenPopup" class="popup">
                 <div class="popup-content">
-                    <span class="close" onclick="closeTokenPopup()">&times;</span>
-                    <p th:text="${token}"></p>
+                    <span class="close" onclick="closeTokenPopup('accessTokenPopup')">&times;</span>
+                    <p th:text="${access_token}"></p>
+                </div>
+            </div>
+
+            <!-- Popup container -->
+            <div id="idTokenPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closeTokenPopup('idTokenPopup')">&times;</span>
+                    <p th:text="${id_token}"></p>
                 </div>
             </div>
 
@@ -89,12 +110,12 @@
 </div>
 
 <script>
-    function openTokenPopup() {
-        document.getElementById("tokenPopup").style.display = "block";
+    function openTokenPopup(id) {
+        document.getElementById(id).style.display = "block";
     }
 
-    function closeTokenPopup() {
-        document.getElementById("tokenPopup").style.display = "none";
+    function closeTokenPopup(id) {
+        document.getElementById(id).style.display = "none";
     }
 
     function openPopup(element) {

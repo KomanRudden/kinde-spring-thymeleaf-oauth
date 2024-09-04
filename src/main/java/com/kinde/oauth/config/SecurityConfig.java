@@ -11,7 +11,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,10 +21,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Slf4j
 public class SecurityConfig {
 
-    private final LogoutHandler customLogoutHandler;
+    private final OidcLogoutHandler oidcLogoutHandler;
 
-    public SecurityConfig(CustomLogoutHandler customLogoutHandler) {
-        this.customLogoutHandler = customLogoutHandler;
+    public SecurityConfig(OidcLogoutHandler oidcLogoutHandler) {
+        this.oidcLogoutHandler = oidcLogoutHandler;
     }
 
     @Bean
@@ -34,7 +33,7 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**").permitAll()
-                        .requestMatchers("/login/**", "/home").permitAll()
+                        .requestMatchers("/", "/home").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -45,7 +44,7 @@ public class SecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/home")
-                        .addLogoutHandler(customLogoutHandler)
+                        .addLogoutHandler(oidcLogoutHandler)
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
                         .clearAuthentication(true)
