@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -24,8 +25,8 @@ import java.util.stream.Collectors;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
 @Slf4j
+@Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
