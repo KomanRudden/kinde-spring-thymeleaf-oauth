@@ -1,12 +1,18 @@
 package com.kinde.oauth.config;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -17,8 +23,12 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +76,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/", "/home").permitAll()
-                        // Uncomment the lines below to configure security based on roles or permissions
+                        /* Uncomment the lines below to configure security based on roles or permissions
+                         * at the configuration level. This project is currently configured at the RestController
+                         * method level.
+                         */
                         // .requestMatchers("/admin").hasRole("admins")
                         // .requestMatchers("/read").hasRole("read")
                         .anyRequest().authenticated()
+                )
+                .exceptionHandling(exceptions ->
+                        exceptions
+                                .accessDeniedHandler(accessDeniedHandler())
+                                .authenticationEntryPoint(authenticationEntryPoint())
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
@@ -116,5 +134,19 @@ public class SecurityConfig {
         return permissions.stream()
                 .map(permission -> new SimpleGrantedAuthority("ROLE_" + permission))
                 .collect(Collectors.toList());
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) -> {
+            // Forward to the custom error page
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/403");
+            requestDispatcher.forward(request, response);
+        };
+    }
+
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, authException) -> response.sendRedirect("500");
     }
 }

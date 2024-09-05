@@ -184,6 +184,11 @@ a {
   padding: var(--g-font-size-large) var(--g-font-size-x-large);
 }
 
+.btn-small {
+  font-size: var(--g-font-size-small);
+  padding: var(--g-font-size-small) var(--g-font-size-base);
+}
+
 .hero {
   align-items: center;
   display: flex;
@@ -266,18 +271,23 @@ a {
 }
 
 .next-steps-section {
-  background: var(--g-color-black);
-  border-radius: var(--g-border-radius-large);
-  box-shadow: var(--g-box-shadow);
-  color: var(--g-color-white);
-  padding: var(--g-spacing-2x-large); /* Adds padding inside the section */
-  margin-top: var(--g-spacing-2x-large); /* Space above the section */
-  word-wrap: break-word; /* Ensures long text wraps properly */
+    flex: 1; /* Makes all sections take up equal space */
+    min-width: 0; /* Prevents overflow issues */
+    background: var(--g-color-black);
+    border-radius: var(--g-border-radius-large);
+    box-shadow: var(--g-box-shadow);
+    color: var(--g-color-white);
+    padding: var(--g-spacing-2x-large); /* Adds padding inside the section */
+    margin-top: var(--g-spacing-2x-large); /* Space above the section */
+    word-wrap: break-word; /* Ensures long text wraps properly */
 }
 
 .horizontal-sections {
+    width: 100%;
     display: flex;
     gap: var(--g-spacing-large); /* Space between sections */
+    justify-content: space-between; /* Evenly spaces the sections */
+    flex-wrap: wrap; /* Ensures sections wrap to the next line if they don't fit in one row */
 }
 
 .horizontal-content {

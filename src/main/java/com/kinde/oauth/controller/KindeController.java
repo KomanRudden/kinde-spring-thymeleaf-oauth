@@ -21,7 +21,18 @@ public class KindeController {
         this.kindeService = kindeService;
     }
 
-    @GetMapping("/admin")
+    @RequestMapping(path = {"/", "/home"}, method = RequestMethod.GET)
+    public String home() {
+        return "home";
+    }
+
+    @GetMapping(path = "/dashboard")
+    public String dashboard(Model model) {
+        model.addAttribute("kindeUser", kindeService.loadDashboard(SecurityContextHolder.getContext().getAuthentication()));
+        return "dashboard";
+    }
+
+    @GetMapping("/admins")
     @PreAuthorize("hasRole('admins')")
     public String adminEndpoint() {
         return "home";
@@ -33,14 +44,8 @@ public class KindeController {
         return "home";
     }
 
-    @RequestMapping(path = {"/", "/home"}, method = RequestMethod.GET)
-    public String home() {
+    @GetMapping("/logout")
+    public String logout() {
         return "home";
-    }
-
-    @GetMapping(path = "/dashboard")
-    public String dashboard(Model model) {
-        model.addAttribute("kindeUser", kindeService.loadDashboard(SecurityContextHolder.getContext().getAuthentication()));
-        return "dashboard";
     }
 }

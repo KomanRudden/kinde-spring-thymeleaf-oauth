@@ -29,7 +29,7 @@
                 </p>
             </div>
             <div class="horizontal-sections">
-                <section class="next-steps-section card-grey">
+                <section class="next-steps-section">
                     <h2 class="text-display-4">ID Token:</h2>
                     <br/>
                     <p class="text-heading-2 token-text">
@@ -37,13 +37,13 @@
                         <a href="#" class="text-display-5" onclick="openTokenPopup('idTokenPopup')">[View]</a>
                     </p>
                     <br/>
-                    <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.idToken}"
+                    <a class="btn btn-light btn-small" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.idToken}"
                        target="_blank">
                         Parse token on JWT.io
                     </a>
                 </section>
 
-                <section class="next-steps-section card-grey">
+                <section class="next-steps-section">
                     <h2 class="text-display-4">Access Token:</h2>
                     <br/>
                     <p class="text-heading-2 token-text">
@@ -51,13 +51,13 @@
                         <a href="#" class="text-display-5" onclick="openTokenPopup('accessTokenPopup')">[View]</a>
                     </p>
                     <br/>
-                    <a class="btn btn-light" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.accessToken}"
+                    <a class="btn btn-light btn-small" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.accessToken}"
                        target="_blank">
                         Parse token on JWT.io
                     </a>
                 </section>
 
-                <section class="next-steps-section card-grey">
+                <section class="next-steps-section">
                     <h2 class="text-display-4">Kinde User Profile:</h2>
                     <br/>
                     <p class="text-heading-2 token-text">
@@ -67,7 +67,7 @@
                     <br/>
                 </section>
 
-                <section class="next-steps-section card-grey">
+                <section class="next-steps-section">
                     <h2 class="text-display-4">Kinde User Roles:</h2>
                     <br/>
                     <ul>
