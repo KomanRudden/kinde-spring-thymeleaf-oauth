@@ -37,7 +37,8 @@
                         <a href="#" class="text-display-5" onclick="openTokenPopup('idTokenPopup')">[View]</a>
                     </p>
                     <br/>
-                    <a class="btn btn-light btn-small" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.idToken}"
+                    <a class="btn btn-light btn-small"
+                       th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.idToken}"
                        target="_blank">
                         Parse token on JWT.io
                     </a>
@@ -51,7 +52,8 @@
                         <a href="#" class="text-display-5" onclick="openTokenPopup('accessTokenPopup')">[View]</a>
                     </p>
                     <br/>
-                    <a class="btn btn-light btn-small" th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.accessToken}"
+                    <a class="btn btn-light btn-small"
+                       th:href="'https://jwt.io/#debugger-io?token=' + ${kindeUser.accessToken}"
                        target="_blank">
                         Parse token on JWT.io
                     </a>
@@ -67,14 +69,22 @@
                     <br/>
                 </section>
 
-                <section class="next-steps-section">
+                <section class="next-steps-section role-buttons-section">
                     <h2 class="text-display-4">Kinde User Roles:</h2>
                     <br/>
-                    <ul>
-                        <li th:each="role : ${kindeUser.roles}"
-                            th:text="${#strings.substringAfter(role, 'ROLE_')}"></li>
+                    <ul class="role-buttons">
+                        <li th:each="role : ${kindeUser.roles}">
+                            <a class="btn btn-light btn-small fixed-size-button"
+                               th:href="@{'/' + ${#strings.substringAfter(role, 'ROLE_')} }">
+                                <span th:text="'Do I have ' + ${#strings.substringAfter(role, 'ROLE_')} + ' access?'">Do I have access?</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn btn-light btn-small fixed-size-button" href="/write">
+                                Do I have write access?
+                            </a>
+                        </li>
                     </ul>
-                    <br/>
                 </section>
             </div>
 

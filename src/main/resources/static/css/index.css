@@ -348,3 +348,31 @@ a {
     word-wrap: break-word; /* Break long words */
     overflow-wrap: break-word; /* Handle long words or URLs */
 }
+
+/* Center the buttons in the section and remove bullet points */
+.role-buttons-section {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;
+    flex-direction: column; /* Stack buttons vertically */
+}
+
+/* Ensure buttons have the same fixed width and center the text */
+.fixed-size-button {
+    width: 200px; /* Adjust the width as needed */
+    text-align: center; /* Center the text inside the button */
+    margin-bottom: 15px; /* Adds space between the buttons */
+}
+
+/* Remove bullet points and center buttons */
+.role-buttons {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margin */
+}
+
+/* Center list items and add spacing */
+.role-buttons li {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+}

@@ -1,7 +1,6 @@
 package com.kinde.oauth.config;
 
 import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -12,28 +11,15 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * Security configuration class that sets up the security filters and OAuth2 login
@@ -85,9 +71,9 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptions ->
-                        exceptions
-                                .accessDeniedHandler(accessDeniedHandler())
-                                .authenticationEntryPoint(authenticationEntryPoint())
+                                exceptions
+                                        .accessDeniedHandler(accessDeniedHandler())
+//                                 .authenticationEntryPoint(authenticationEntryPoint())
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
@@ -96,15 +82,6 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .oidcUserService(new CustomOidcUserService())
                         )
-                );
-        http
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/home")
-                        .addLogoutHandler(oidcLogoutHandler)
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .clearAuthentication(true)
                 );
 
         return http.build();
@@ -143,10 +120,5 @@ public class SecurityConfig {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/403");
             requestDispatcher.forward(request, response);
         };
-    }
-
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint() {
-        return (request, response, authException) -> response.sendRedirect("500");
     }
 }
