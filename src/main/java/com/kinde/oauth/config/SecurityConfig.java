@@ -32,17 +32,6 @@ import java.util.stream.Collectors;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final OidcLogoutHandler oidcLogoutHandler;
-
-    /**
-     * Constructs a SecurityConfig with the provided OidcLogoutHandler.
-     *
-     * @param oidcLogoutHandler the logout handler for OIDC authentication.
-     */
-    public SecurityConfig(OidcLogoutHandler oidcLogoutHandler) {
-        this.oidcLogoutHandler = oidcLogoutHandler;
-    }
-
     /**
      * Configures the security filter chain, setting up CORS, authorization rules,
      * OAuth2 resource server, and OAuth2 login with OIDC user service.
@@ -71,8 +60,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptions ->
-                                exceptions
-                                        .accessDeniedHandler(accessDeniedHandler())
+                        exceptions
+                                .accessDeniedHandler(accessDeniedHandler())
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
