@@ -73,7 +73,6 @@ public class SecurityConfig {
                 .exceptionHandling(exceptions ->
                                 exceptions
                                         .accessDeniedHandler(accessDeniedHandler())
-//                                 .authenticationEntryPoint(authenticationEntryPoint())
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2
                         .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
@@ -116,7 +115,6 @@ public class SecurityConfig {
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return (HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) -> {
-            // Forward to the custom error page
             RequestDispatcher requestDispatcher = request.getRequestDispatcher("/403");
             requestDispatcher.forward(request, response);
         };

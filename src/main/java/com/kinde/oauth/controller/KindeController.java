@@ -2,7 +2,6 @@ package com.kinde.oauth.controller;
 
 import com.kinde.oauth.service.KindeService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -10,21 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.reactive.function.client.WebClient;
 
 @Slf4j
 @Controller
 public class KindeController {
 
     private final KindeService kindeService;
-
-    @Value("${domain-uri}")
-    private String domain;
-
-    @Value("${redirect-uri}")
-    private String redirectUri;
-
-    private final WebClient webClient = WebClient.builder().build();
 
     public KindeController(KindeService kindeService) {
         this.kindeService = kindeService;
