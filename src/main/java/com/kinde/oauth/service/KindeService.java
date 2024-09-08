@@ -13,18 +13,35 @@ import java.util.HashSet;
 
 import static org.springframework.security.oauth2.client.web.reactive.function.client.ServletOAuth2AuthorizedClientExchangeFilterFunction.oauth2AuthorizedClient;
 
+/**
+ * Service class to handle interactions with the Kinde OAuth2 authorization service
+ * and retrieve user information.
+ */
 @Service
 public class KindeService {
 
     private final OAuth2AuthorizedClientService authorizedClientService;
     private final WebClient userProfileClient;
 
+    /**
+     * Constructor to initialize the KindeService.
+     *
+     * @param authorizedClientService the service for managing authorized OAuth2 clients.
+     * @param userProfileClient       the {@link WebClient} used to fetch the user profile.
+     */
     public KindeService(OAuth2AuthorizedClientService authorizedClientService,
                         WebClient userProfileClient) {
         this.authorizedClientService = authorizedClientService;
         this.userProfileClient = userProfileClient;
     }
 
+    /**
+     * Loads the user dashboard by fetching the OAuth2 authorized client and retrieving
+     * the user profile data.
+     *
+     * @param authentication the current user's {@link Authentication} object.
+     * @return a {@link KindeProfile} object containing user details.
+     */
     public KindeProfile loadDashboard(Authentication authentication) {
 
         OAuth2AuthorizedClient authorizedClient = getoAuth2AuthorizedClient(authentication);
@@ -47,6 +64,12 @@ public class KindeService {
                 .build();
     }
 
+    /**
+     * Retrieves the OAuth2 authorized client for the authenticated user.
+     *
+     * @param authentication the current user's {@link Authentication} object.
+     * @return the {@link OAuth2AuthorizedClient} for the user.
+     */
     private OAuth2AuthorizedClient getoAuth2AuthorizedClient(Authentication authentication) {
         return authorizedClientService.loadAuthorizedClient("kinde", authentication.getName());
     }

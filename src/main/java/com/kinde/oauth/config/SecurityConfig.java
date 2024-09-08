@@ -101,6 +101,13 @@ public class SecurityConfig {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Defines a bean for handling Access Denied (403 Forbidden) errors.
+     * When an authenticated user tries to access a resource they do not have permission for,
+     * they are redirected to the "/403" error page.
+     *
+     * @return an {@link AccessDeniedHandler} that forwards the request to the "/403" page.
+     */
     @Bean
     public AccessDeniedHandler accessDeniedHandler() {
         return (HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) -> {

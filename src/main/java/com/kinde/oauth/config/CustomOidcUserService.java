@@ -43,7 +43,7 @@ public class CustomOidcUserService extends OidcUserService {
      */
     private Jwt parseJwtToken(String token) {
         return Jwt.withTokenValue(token)
-                .header("alg", "none")
+                .header("alg", "RS256")
                 .claim("permissions", List.of("read", "admin"))
                 .build();
     }
