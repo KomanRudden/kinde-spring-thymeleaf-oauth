@@ -2,6 +2,8 @@
 
 This project demonstrates the integration of OAuth2 login with Kinde using Spring Boot and Spring Security. The application provides a simple web interface with authentication and role-based authorization.
 
+Run the app, go to `http://localhost:8081` and click sign up to add your new Kinde application. You will need your new client id and secret from the Kinde portal for the `application.properties`. You will also need to configure roles and permissions. This starter uses three for demonstration purposes: `read`, `write` and `admin`.
+
 ## Table of Contents
 
 - [Requirements](#requirements)
@@ -23,7 +25,7 @@ This project demonstrates the integration of OAuth2 login with Kinde using Sprin
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-repo/kinde-spring-oauth.git
+   git clone git@github.com:KomanRudden/kinde-spring-thymeleaf-oauth.git
    cd kinde-spring-oauth
    ```
 
