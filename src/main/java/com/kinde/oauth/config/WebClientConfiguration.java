@@ -17,8 +17,6 @@ public class WebClientConfiguration {
 
 	@Value("${user-profile-uri}")
 	String userprofileUri;
-	@Value("${logout-uri}")
-	String logoutUri;
 
 	/**
 	 * Creates a {@link WebClient} bean specifically for accessing the user profile
