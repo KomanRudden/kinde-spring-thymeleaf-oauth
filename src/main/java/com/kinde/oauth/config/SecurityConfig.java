@@ -67,9 +67,6 @@ public class SecurityConfig {
                         exceptions
                                 .accessDeniedHandler(accessDeniedHandler())
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
-                )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(userInfo -> userInfo
                                 .oidcUserService(new CustomOidcUserService(issuerUri))
@@ -77,32 +74,6 @@ public class SecurityConfig {
                 );
 
         return http.build();
-    }
-
-    /**
-     * Configures the JwtAuthenticationConverter to extract authorities from JWT claims.
-     *
-     * @return the configured JwtAuthenticationConverter.
-     */
-    @Bean
-    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
-        converter.setJwtGrantedAuthoritiesConverter(this::extractAuthoritiesFromClaims);
-        return converter;
-    }
-
-    /**
-     * Extracts authorities from the JWT claims, converting them to GrantedAuthority.
-     *
-     * @param jwt the JWT containing the claims.
-     * @return a collection of GrantedAuthority extracted from the JWT claims.
-     */
-    private Collection<GrantedAuthority> extractAuthoritiesFromClaims(Jwt jwt) {
-        var permissions = jwt.getClaimAsStringList("permissions");
-
-        return permissions.stream()
-                .map(permission -> new SimpleGrantedAuthority("ROLE_" + permission))
-                .collect(Collectors.toList());
     }
 
     /**
