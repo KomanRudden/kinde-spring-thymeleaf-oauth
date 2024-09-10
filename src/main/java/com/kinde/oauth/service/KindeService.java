@@ -1,5 +1,7 @@
 package com.kinde.oauth.service;
 
+import com.kinde.KindeClient;
+import com.kinde.KindeClientBuilder;
 import com.kinde.oauth.model.KindeProfile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,12 +41,11 @@ public class KindeService {
      * Loads the user dashboard by fetching the OAuth2 authorized client and retrieving
      * the user profile data.
      *
-     * @param authentication the current user's {@link Authentication} object.
      * @return a {@link KindeProfile} object containing user details.
      */
-    public KindeProfile loadDashboard(Authentication authentication) {
+    public KindeProfile loadDashboard() {
 
-        OAuth2AuthorizedClient authorizedClient = getoAuth2AuthorizedClient(authentication);
+        OAuth2AuthorizedClient authorizedClient = getOAuth2AuthorizedClient(SecurityContextHolder.getContext().getAuthentication());
 
         // Extracting user profile via Spring Webflux client
         String userprofile = this.userProfileClient
@@ -70,7 +71,7 @@ public class KindeService {
      * @param authentication the current user's {@link Authentication} object.
      * @return the {@link OAuth2AuthorizedClient} for the user.
      */
-    private OAuth2AuthorizedClient getoAuth2AuthorizedClient(Authentication authentication) {
+    private OAuth2AuthorizedClient getOAuth2AuthorizedClient(Authentication authentication) {
         return authorizedClientService.loadAuthorizedClient("kinde", authentication.getName());
     }
 }

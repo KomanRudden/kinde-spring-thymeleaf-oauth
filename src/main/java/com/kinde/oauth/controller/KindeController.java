@@ -3,7 +3,6 @@ package com.kinde.oauth.controller;
 import com.kinde.oauth.service.KindeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +46,7 @@ public class KindeController {
      */
     @GetMapping(path = "/dashboard")
     public String dashboard(Model model) {
-        model.addAttribute("kindeUser", kindeService.loadDashboard(SecurityContextHolder.getContext().getAuthentication()));
+        model.addAttribute("kindeUser", kindeService.loadDashboard());
         return "dashboard";
     }
 
