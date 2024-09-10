@@ -79,7 +79,7 @@ public class KindeController {
      * @return the name of the "write" view.
      */
     @GetMapping("/write")
-    @PreAuthorize("hasRole('write')")
+    // @PreAuthorize("hasRole('write')")
     public String writeEndpoint() {
         return "write";
     }

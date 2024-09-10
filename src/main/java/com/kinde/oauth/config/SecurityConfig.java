@@ -46,12 +46,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/", "/home").permitAll()
-                        /* Uncomment the lines below to configure security based on roles or permissions
-                         * at the configuration level. This project is currently configured at the RestController
-                         * method level.
+                        /* This project is currently configured at the RestController method level for `read` & `admin`.
+                         * `write` is configured below at the configuration level.
                          */
                         // .requestMatchers("/admin").hasRole("admins")
                         // .requestMatchers("/read").hasRole("read")
+                         .requestMatchers("/write").hasRole("write")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(exceptions ->
