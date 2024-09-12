@@ -1,13 +1,18 @@
 package com.kinde.oauth.controller;
 
+import com.kinde.authorization.AuthorizationUrl;
 import com.kinde.oauth.service.KindeService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.net.URI;
 
 /**
  * Controller for handling Kinde OAuth-related endpoints and rendering views
@@ -81,5 +86,35 @@ public class KindeController {
     // @PreAuthorize("hasRole('write')")
     public String writeEndpoint() {
         return "write";
+    }
+
+    /**
+     * Handles requests to the register endpoint, restricted to users with the 'admin' role.
+     *
+     * @return the url to redirect to for user registration
+     */
+    @GetMapping("/register")
+    @PreAuthorize("hasRole('admin')")
+    public ResponseEntity<Void> register() {
+        AuthorizationUrl authorizationUrl = kindeService.register();
+        URI redirectUri = URI.create(authorizationUrl.getUrl().toExternalForm());
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(redirectUri)
+                .build();
+    }
+
+    /**
+     * Handles requests to the register endpoint, restricted to users with the 'admin' role.
+     *
+     * @return the url to redirect to for user registration
+     */
+    @GetMapping("/create/org")
+    @PreAuthorize("hasRole('admin')")
+    public ResponseEntity<Void> createOrg() {
+        AuthorizationUrl authorizationUrl = kindeService.createOrg();
+        URI redirectUri = URI.create(authorizationUrl.getUrl().toExternalForm());
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .location(redirectUri)
+                .build();
     }
 }

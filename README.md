@@ -2,7 +2,7 @@
 
 This project demonstrates the integration of OAuth2 login with Kinde using Spring Boot and Spring Security. The application provides a simple web interface with authentication and role-based authorization.
 
-Run the app, go to `http://localhost:8081` and click sign up to add your new Kinde application. You will need your new client id and secret from the Kinde portal for the `application.properties`. You will also need to configure roles and permissions. This starter uses three for demonstration purposes: `read`, `write` and `admin`.
+Run the app, go to `http://localhost:8080` and click sign up to add your new Kinde application. You will need your new client id and secret from the Kinde portal for the `application.properties`. You will also need to configure roles and permissions. This starter uses three for demonstration purposes: `read`, `write` and `admin`.
 
 ## Table of Contents
 
@@ -72,7 +72,7 @@ The security is configured in `SecurityConfig.java`. Key configurations include:
    ```
 
 2. **Access the Application:**
-   Open your browser and navigate to `http://localhost:8081`.
+   Open your browser and navigate to `http://localhost:8080`.
 
 ## Endpoints
 
