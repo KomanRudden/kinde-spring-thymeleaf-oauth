@@ -62,6 +62,8 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .oidcUserService(new CustomOidcUserService(issuerUri))
                         )
+                        .defaultSuccessUrl("/dashboard", true)
+                        .failureUrl("/error")
                 );
 
         return http.build();
