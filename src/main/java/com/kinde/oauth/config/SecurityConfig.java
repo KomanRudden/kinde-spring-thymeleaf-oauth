@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 /**
  * Security configuration class that sets up the security filters and OAuth2 login
@@ -64,6 +65,11 @@ public class SecurityConfig {
                         )
                         .defaultSuccessUrl("/dashboard", true)
                         .failureUrl("/error")
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/signout")
+                        .addLogoutHandler(new SecurityContextLogoutHandler())
+                        .logoutSuccessUrl("/home")
                 );
 
         return http.build();

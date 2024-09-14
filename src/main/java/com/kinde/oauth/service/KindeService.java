@@ -3,6 +3,7 @@ package com.kinde.oauth.service;
 import com.kinde.authorization.AuthorizationUrl;
 import com.kinde.oauth.model.KindeProfile;
 import com.kinde.user.UserInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.HashSet;
  * and retrieve user information.
  */
 @Service
+@Slf4j
 public class KindeService {
 
     private final KindeClientService kindeClientService;
@@ -51,8 +53,17 @@ public class KindeService {
         return kindeClientService.getKindeClientSession().register();
     }
 
-    public AuthorizationUrl createOrg() {
-        return kindeClientService.getKindeClientSession().createOrg("Kinde");
+    public AuthorizationUrl createOrg(String orgName) {
+        return kindeClientService.getKindeClientSession().createOrg(orgName);
+    }
+
+    public AuthorizationUrl signout() {
+        try {
+            return kindeClientService.getKindeClientSession().logout();
+        } catch (Exception e) {
+            log.error("Unable to logout: {}", e.getMessage());
+            return null;
+        }
     }
 }
 

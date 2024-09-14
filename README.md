@@ -2,7 +2,7 @@
 
 This project demonstrates the integration of OAuth2 login with Kinde using Spring Boot and Spring Security. The application provides a simple web interface with authentication and role-based authorization.
 
-Run the app, go to `http://localhost:8080` and click sign up to add your new Kinde application. You will need your new client id and secret from the Kinde portal for the `application.properties`. You will also need to configure roles and permissions. This starter uses three for demonstration purposes: `read`, `write` and `admin`.
+Run the app, go to `http://localhost:8080` and click sign up to add your new Kinde application. You will need your Kinde domain, client id and client secret from the Kinde portal for the `.env` file. You will also need to configure roles and permissions on the Kinde portal. This starter uses three for demonstration purposes: `read`, `write` and `admin`. You will need to add at least `admin` as a minimum. 
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Run the app, go to `http://localhost:8080` and click sign up to add your new Kin
 
    ```bash
    git clone git@github.com:KomanRudden/kinde-spring-thymeleaf-oauth.git
-   cd kinde-spring-oauth
+   cd kinde-spring-thymeleaf-oauth
    ```
 
 2. **Build the project:**
@@ -78,19 +78,21 @@ The security is configured in `SecurityConfig.java`. Key configurations include:
 
 The application provides several endpoints:
 
-- **`/home` or `/`** - Publicly accessible homepage.
-- **`/admin`** - Accessible to users with the `admins` role.
+- **`/home` or `/`** - Publicly accessible landing page.
+- **`/admin`** - Accessible to users with the `admin` role. 
 - **`/read`** - Accessible to users with the `read` role.
 - **`/write`** - Accessible to users with the `write` role.
 - **`/dashboard`** - Displays the user's Kinde profile data.
+- **`/register`** - Register a new user for your Kinde Organisation.
+- **`/create/org`** - Create a new Kinde Organsisation.
 
 ## Security Configuration
 
 - **Public Access:**
-  The home page (`/home`) and static resources (`/css/**`) are accessible without authentication.
+  The landing page (`/home`, `/`) and static resources (`/css/**`) are accessible without authentication.
 
 - **Authenticated Access:**
-  Other routes require authentication, and access is controlled by roles. For example, `/admin` requires the `admins` role.
+  Other routes require authentication, and access is controlled by roles. For example, `/register` and `/create/org` require the `admin` role.
 
 - **JWT Processing:**
   The JWT `permissions` claim is used to assign roles provided from Kinde.
@@ -100,7 +102,7 @@ The application provides several endpoints:
 The application handles logout with the following settings:
 
 - **Logout URL:** `/logout`
-- **Logout Success URL:** `/home`
+- **Logout Success URL:** `/`
 - **Session Management:** Invalidates the session and clears authentication.
 
 ## Conclusion
